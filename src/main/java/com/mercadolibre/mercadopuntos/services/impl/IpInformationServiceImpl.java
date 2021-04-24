@@ -1,9 +1,6 @@
 package com.mercadolibre.mercadopuntos.services.impl;
 
-import com.mercadolibre.mercadopuntos.models.IpCountryInformationModel;
-import com.mercadolibre.mercadopuntos.models.IpInformationId;
 import com.mercadolibre.mercadopuntos.models.StatsModel;
-import com.mercadolibre.mercadopuntos.repository.IpInformationRepository;
 import com.mercadolibre.mercadopuntos.repository.StatsRepository;
 import com.mercadolibre.mercadopuntos.validators.IpValidator;
 import com.mercadolibre.mercadopuntos.exceptions.ValidationException;
@@ -22,7 +19,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -51,17 +47,14 @@ public class IpInformationServiceImpl implements IpInformationService {
 
     private QuoteService quoteService;
 
-    private IpInformationRepository ipInformationRepository;
-
     private StatsRepository statsRepository;
 
 
     public IpInformationServiceImpl(IpCountryService ipCountryService, CountryIsoService countryIsoService,
-                                    QuoteService quoteService, IpInformationRepository ipInformationRepository, StatsRepository statsRepository){
+                                    QuoteService quoteService, StatsRepository statsRepository){
         this.countryIsoService = countryIsoService;
         this.ipCountryService = ipCountryService;
         this.quoteService = quoteService;
-        this.ipInformationRepository = ipInformationRepository;
         this.statsRepository =  statsRepository;
     }
 
@@ -82,8 +75,6 @@ public class IpInformationServiceImpl implements IpInformationService {
         IpInformationResponseDto response = getIpInformationResponse(ip,ipCountryDetailDto, countryInfoDto);
 
         addingCurrencyAndQuote(countryInfoDto.getCurrencies(),response);
-
-        saveIpInformation(response);
 
         saveStats(response);
 
@@ -197,13 +188,6 @@ public class IpInformationServiceImpl implements IpInformationService {
         }
     }
 
-    private void saveIpInformation(IpInformationResponseDto responseDto){
-        IpCountryInformationModel model = new IpCountryInformationModel();
-        new ModelMapper().map(responseDto, model);
-        model.setId( new IpInformationId(responseDto.getIp(),ZonedDateTime.now()));
-        ipInformationRepository.save(model);
-
-    }
 
 
 

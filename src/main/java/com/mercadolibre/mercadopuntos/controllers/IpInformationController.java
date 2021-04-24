@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/ip-information")
+@RequestMapping("/api")
 public class IpInformationController {
 
     private Logger logger = LoggerFactory.getLogger(IpInformationController.class);
