@@ -1,6 +1,7 @@
 package com.mercadolibre.mercadopuntos;
 
 import com.mercadolibre.mercadopuntos.repository.StatsRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -22,6 +23,11 @@ public class IpInformationApplication {
 	@Bean
 	public RestTemplate getRestTemplate() {
 		return new RestTemplate();
+	}
+
+	@Bean
+	public ModelMapper getModelMapper(){
+		return  new ModelMapper();
 	}
 
 

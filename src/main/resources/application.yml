@@ -1,0 +1,29 @@
+spring:
+  data:
+    mongodb:
+      host: "api-database"
+
+server:
+  servlet:
+    context-path: "/ip-information"
+
+ip:
+  information:
+    country:
+      url: "https://api.ip2country.info/ip?{ip}"
+
+country:
+  detail:
+    url: "https://restcountries.eu/rest/v2/alpha/{isoCode3}"
+
+currency:
+  quote:
+    url: "http://data.fixer.io/api/latest?access_key={token}"
+    token: "5a5472dc480e4e6f05d87918800d729e"
+
+#Ref to Bs As
+latitude:
+  ref: -34.603722
+
+longitude:
+  ref: -58.381592

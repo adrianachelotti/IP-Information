@@ -13,7 +13,8 @@ public class IpInformationResponseDto {
 
     private String ip;
     private String  codeIso3;
-    private String name;
+    private String country;
+    private ZonedDateTime date;
     private List<ZonedDateTime> timezones;
     private List<String> languages;
     private BigDecimal distance;

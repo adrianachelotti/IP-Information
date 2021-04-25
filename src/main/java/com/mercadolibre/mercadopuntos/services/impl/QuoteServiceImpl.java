@@ -1,6 +1,7 @@
 package com.mercadolibre.mercadopuntos.services.impl;
 
 import com.mercadolibre.mercadopuntos.dtos.QuoteDto;
+import com.mercadolibre.mercadopuntos.exceptions.DependencyException;
 import com.mercadolibre.mercadopuntos.services.QuoteService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,12 @@ public class QuoteServiceImpl implements QuoteService {
     }
 
     @Override
-    public QuoteDto getQuote() {
-        return restTemplate.getForObject(currencyQuoteUrl, QuoteDto.class,token);
+    public QuoteDto getQuote() throws DependencyException {
+        try {
+            return restTemplate.getForObject(currencyQuoteUrl, QuoteDto.class, token);
+        }catch (Exception e){
+            throw new DependencyException();
+        }
     }
 
 }

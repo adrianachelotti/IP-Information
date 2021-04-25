@@ -1,6 +1,7 @@
 package com.mercadolibre.mercadopuntos.services.impl;
 
 import com.mercadolibre.mercadopuntos.dtos.CountryInfoDto;
+import com.mercadolibre.mercadopuntos.exceptions.DependencyException;
 import com.mercadolibre.mercadopuntos.services.CountryIsoService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
@@ -22,7 +23,12 @@ public class CountryIS0ServiceImpl implements CountryIsoService {
 
     @Cacheable(value = "countries", key = "#codeIso3")
     @Override
-    public CountryInfoDto getCountryIsoInfoDetail(String codeIso3) {
-        return restTemplate.getForObject(countryDetailUrl, CountryInfoDto.class,codeIso3);
+    public CountryInfoDto getCountryIsoInfoDetail(String codeIso3) throws DependencyException {
+        CountryInfoDto countryInfoDto;
+        try {
+            return restTemplate.getForObject(countryDetailUrl, CountryInfoDto.class, codeIso3);
+        }catch (Exception exception){
+            throw new DependencyException();
+        }
     }
 }

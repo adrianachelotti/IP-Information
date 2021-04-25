@@ -1,8 +1,8 @@
 package com.mercadolibre.mercadopuntos.controllers;
 
+import com.mercadolibre.mercadopuntos.dtos.IpInformationRequestDto;
 import com.mercadolibre.mercadopuntos.dtos.IpInformationResponseDto;
-import com.mercadolibre.mercadopuntos.dtos.StatsDto;
-import com.mercadolibre.mercadopuntos.dtos.StatsResponseDto;
+import com.mercadolibre.mercadopuntos.exceptions.DependencyException;
 import com.mercadolibre.mercadopuntos.exceptions.ValidationException;
 import com.mercadolibre.mercadopuntos.services.IpInformationService;
 import org.slf4j.Logger;
@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping
 public class IpInformationController {
 
     private Logger logger = LoggerFactory.getLogger(IpInformationController.class);
@@ -23,12 +23,12 @@ public class IpInformationController {
     }
 
 
-    @PostMapping("/trace/")
-    public IpInformationResponseDto getIPInformation(@RequestBody String ip) throws ValidationException {
-        logger.info("IpInformationController - getIPInformation ip: {} ",ip);
+    @PostMapping("/trace")
+    public IpInformationResponseDto getIPInformation(@RequestBody IpInformationRequestDto ipInformationRequest) throws ValidationException, DependencyException {
+        logger.info("IpInformationController - getIPInformation ip: {} ",ipInformationRequest);
         try {
-            return this.ipInformationService.getIpInformationResponse(ip);
-        }catch (ValidationException exception){
+            return this.ipInformationService.getIpInformation(ipInformationRequest.getIp());
+        }catch (ValidationException | DependencyException exception){
             logger.error(exception.getMessage(), exception);
             throw exception;
         }
@@ -36,16 +36,5 @@ public class IpInformationController {
     }
 
 
-    @GetMapping("/stats/")
-    public StatsResponseDto getStats() throws ValidationException {
-        logger.info("IpInformationController - stats  ");
-        try {
-            return this.ipInformationService.getStats();
-        }catch (ValidationException exception){
-            logger.error(exception.getMessage(), exception);
-            throw exception;
-        }
-
-    }
 
 }
