@@ -70,8 +70,6 @@ public class IpInformationServiceImpl implements IpInformationService {
 
         CountryInfoDto countryInfoDto = countryIsoService.getCountryIsoInfoDetail(ipCountryDetailDto.getCountryCode3());
 
-        System.out.println(countryInfoDto.toString());
-
         IpInformationResponseDto response = getIpInformationResponse(ip,ipCountryDetailDto, countryInfoDto);
 
         addingCurrencyAndQuote(countryInfoDto.getCurrencies(),response);
@@ -84,7 +82,7 @@ public class IpInformationServiceImpl implements IpInformationService {
     private void saveStats(IpInformationResponseDto response) {
         Optional result =statsRepository.findById(response.getCodeIso3());
         StatsModel statsModel= null;
-        if (result!=null && result.isPresent()){
+        if (result.isPresent()){
             statsModel = (StatsModel) result.get();
             statsModel.setInvocations(statsModel.getInvocations()+1);
         }else{

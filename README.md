@@ -1,12 +1,21 @@
 # IP-Information
-To run local:
+To run locally:
+
+###Generate the jar file 
 
 mvn package
-
+### Build the image
 docker build -t api-docker-ip-information:latest .
-
+###Run with docker compose
 docker-compose up
 
-Swagger url: 
+##To run with the IDE:
+###Run Mongo db with docker :
+docker run --name api-database -p 27018:27017 mongo:latest
+
+java -jar target/ip-informationXXXXXX.jar -Dspring.data.mongodb.host=localhost -Dspring.data.mongodb.port=27018
+
+##APIs in Swagger url: 
 
 http://localhost:9090/ip-information/swagger-ui.html
+
