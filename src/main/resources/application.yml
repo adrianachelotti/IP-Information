@@ -1,8 +1,7 @@
 spring:
   data:
     mongodb:
-      host: "api-database"
-
+      uri: mongodb+srv://admin:admin@cluster0.rkk05.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 server:
   servlet:
     context-path: "/ip-information"

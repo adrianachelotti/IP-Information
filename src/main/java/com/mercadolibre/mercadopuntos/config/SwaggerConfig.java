@@ -23,8 +23,8 @@ public class SwaggerConfig {
                 .select()
                 .apis(
                         RequestHandlerSelectors
-                                .basePackage("com.mercadolibre.mercadopuntos.controller"))
-                .paths(regex("/api.*"))
+                                .basePackage("com.mercadolibre.mercadopuntos.controllers"))
+                .paths(regex("/.*"))
                 .build();
     }
 
