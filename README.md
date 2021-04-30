@@ -15,5 +15,6 @@ To run locally:
 
 ## APIs in Swagger url: 
 
-- http://localhost:9090/ip-information/swagger-ui.html
+- http://localhost:{docker?9090:8080}/ip-information/swagger-ui.html
+
 
