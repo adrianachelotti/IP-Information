@@ -53,7 +53,7 @@ public class StatsServiceImpl implements StatsService {
             responseDto = StatsResponseDto.builder()
                     .minStatsDto(minStatsDto)
                     .maxStatsDto(maxStatsDto)
-                    .averageDistance(averageDistance)
+                    .averageDistance(String.format("%.0f kms",averageDistance))
                     .build();
         }
         return responseDto;

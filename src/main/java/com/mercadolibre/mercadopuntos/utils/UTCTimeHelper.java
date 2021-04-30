@@ -11,9 +11,8 @@ public class UTCTimeHelper {
     public static final String EMPTY = "";
     public static final String UTC = "UTC";
 
-    public static List<ZonedDateTime> getTimeZoneListUTC(List<String> utcTimeZoneList){
+    public static List<ZonedDateTime> getTimeZoneListUTC(List<String> utcTimeZoneList, ZonedDateTime now){
 
-        ZonedDateTime now = ZonedDateTime.now();
         return utcTimeZoneList.stream()
                               .map(utc -> utc.replace(UTC, EMPTY))
                               .map( p -> getTimeFromUTC(p,now))
@@ -22,7 +21,8 @@ public class UTCTimeHelper {
     }
 
     private static ZonedDateTime getTimeFromUTC(String utc, ZonedDateTime now) {
-        ZoneOffset zoneOffSet= ZoneOffset.of(utc);
+        String offset = utc.isEmpty()?"+00:00":utc;
+        ZoneOffset zoneOffSet= ZoneOffset.of(offset);
         return now.withZoneSameInstant(zoneOffSet);
 
     }

@@ -1,21 +1,20 @@
 # IP-Information
 To run locally:
 
-###Generate the jar file 
-
-mvn package
+### Generate the jar file 
+`mvn package`
 ### Build the image
-docker build -t api-docker-ip-information:latest .
-###Run with docker compose
-docker-compose up
+`docker build -t api-docker-ip-information:latest .`
+### Run with docker
+`docker run -d --name ip-information-rest -p 9090:8080 api-docker-ip-information:latest`
 
-##To run with the IDE:
-###Run Mongo db with docker :
-docker run --name api-database -p 27018:27017 mongo:latest
 
-java -jar target/ip-informationXXXXXX.jar -Dspring.data.mongodb.host=localhost -Dspring.data.mongodb.port=27018
+## Script
 
-##APIs in Swagger url: 
+`java -jar target/ip-informationXXXXXX.jar -Djdk.tls.client.protocols=TLSv1.2`
 
-http://localhost:9090/ip-information/swagger-ui.html
+## APIs in Swagger url: 
+
+- http://localhost:{docker?9090:8080}/ip-information/swagger-ui.html
+
 

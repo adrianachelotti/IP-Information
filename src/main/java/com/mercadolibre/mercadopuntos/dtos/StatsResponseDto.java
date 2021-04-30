@@ -13,5 +13,5 @@ public class StatsResponseDto {
 
     private StatsDto maxStatsDto;
 
-    private BigDecimal averageDistance;
+    private String averageDistance;
 }
