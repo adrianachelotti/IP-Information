@@ -6,6 +6,7 @@ server:
   servlet:
     context-path: "/ip-information"
 
+
 ip:
   information:
     country:
@@ -20,9 +21,5 @@ currency:
     url: "http://data.fixer.io/api/latest?access_key={token}"
     token: "5a5472dc480e4e6f05d87918800d729e"
 
-#Ref to Bs As
-latitude:
-  ref: -34.603722
 
-longitude:
-  ref: -58.381592
+
